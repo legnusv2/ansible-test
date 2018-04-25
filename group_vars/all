@@ -1,0 +1,12 @@
+username: nigel.euan
+app_name: dummy
+
+git_host: bitbucket.org
+repo_url: git@bitbucket.org:legnusv2/django-ansible.git
+app_dir: /home/{{ username }}/{{ app_name }}
+
+db_name: dummy
+db_user: dun
+db_user_pass: nmy123xx
+
+venv_dir: "{{ app_dir }}/venv"

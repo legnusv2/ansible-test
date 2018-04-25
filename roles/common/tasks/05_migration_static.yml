@@ -1,0 +1,9 @@
+- name: Migrate
+  django_manage: app_path={{ app_dir }}
+                  command=migrate
+                  virtualenv={{ venv_dir }}
+
+- name: Collect statics
+  django_manage: app_path={{ app_dir }}
+                command=collectstatic
+                virtualenv={{ venv_dir }}

@@ -1,0 +1,23 @@
+upstream app_sock {
+    server unix:{{ app_dir }}/app.sock;
+}
+
+server {
+    listen 80;
+    server_name 35.229.81.95;
+
+    access_log {{ app_dir }}/access.log;
+    error_log {{ app_dir }}/error.log;
+
+    charset utf-8;
+
+    location /static {
+        autoindex on;
+        alias {{ app_dir }}/static/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://app_sock;
+    }
+}

@@ -1,0 +1,11 @@
+- name: Install virtualenv
+  apt: name=python-virtualenv state=latest
+  become: yes
+
+- name: Creare venv folder
+  file: path={{ venv_dir }} state=directory
+
+- name: Install requirements
+  pip: requirements={{ app_dir }}/requirements.txt
+        virtualenv={{ venv_dir }}
+        virtualenv_python=python3

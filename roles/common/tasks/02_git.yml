@@ -1,0 +1,10 @@
+- name: Install git
+  apt: name=git state=latest
+  become: yes
+
+- name: Get host ssh key
+  shell: ssh-keyscan -t rsa {{ git_host }} >> /home/{{ username }}/.ssh/known_hosts
+
+- name: Clone git
+  git: repo={{ repo_url }}
+        dest={{ app_dir }}

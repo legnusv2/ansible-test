@@ -1,0 +1,27 @@
+- name: Install postgresql
+  apt: name={{ item }} state=latest
+  become: yes
+  with_items:
+    - libpq-dev
+    - python-psycopg2
+    - postgresql
+
+- name: Start postgresql
+  service: name=postgresql enabled=yes state=started
+  become: yes
+
+- name: Create db
+  postgresql_db: name={{ db_name }}
+  become_user: postgres
+  become: yes
+
+- name: Create user
+  postgresql_user: db={{ db_name }}
+                    name={{ db_user }}
+                    password={{ db_user_pass }}
+                    priv=ALL
+                    role_attr_flags=NOSUPERUSER
+  become_user: postgres
+  become: yes
+  notify:
+    - restart postgresql

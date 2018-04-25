@@ -1,0 +1,6 @@
+- name: Config gunicorn service
+  template: src=gunicorn.service
+            dest=/etc/systemd/system
+  become: yes
+  notify:
+    - restart gunicorn

@@ -1,0 +1,7 @@
+- include: 01_server.yml
+- include: 02_git.yml
+- include: 03_postgresql.yml
+- include: 04_enviroment.yml
+- include: 05_migration_static.yml
+- include: 06_gunicorn.yml
+- include: 07_nginx.yml

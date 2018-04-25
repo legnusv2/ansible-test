@@ -1,0 +1,15 @@
+- name: Install nginx
+  apt: name=nginx state=latest
+  become: yes
+
+- name: Write site config file
+  template: src={{ app_name }} dest=/etc/nginx/sites-available/
+  become: yes
+
+- name: Enable site
+  file: src=/etc/nginx/sites-available/{{ app_name }}
+        dest=/etc/nginx/sites-enabled/{{ app_name }}
+        state=link
+  become: yes
+  notify:
+    - restart nginx
